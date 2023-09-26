@@ -2,6 +2,9 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import fetchPlaceDetails from "../utils/fetchPlaceDetails";
 
+import CurrentDataDisplay from "../components/CurrentDataDisplay";
+import SevenDayWeather from "../components/SevenDayWeather";
+
 type currentPlace = {
   elevation: number;
   generationtime_ms: number;
@@ -30,10 +33,10 @@ const LocationDataPage: React.FC = () => {
   }, [lat, lng]);
 
   return (
-    <>
-      <div>{locationName}</div>
-      <div>{currentPlace!.timezone}</div>
-    </>
+    <div className=" bg-blue-950 min-h-screen relative">
+      <CurrentDataDisplay locationName={locationName} />
+      <SevenDayWeather />
+    </div>
   );
 };
 

@@ -42,7 +42,7 @@ const WelcomeForm: React.FC = () => {
       `${selectedCity?.name} ${selectedCity?.lat} ${selectedCity?.lng} `,
       "_"
     );
-    navigate(`/${slug.toLowerCase()}`);
+    navigate(`/${slug}`);
   };
 
   useEffect(() => {
