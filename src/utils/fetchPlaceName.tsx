@@ -1,7 +1,7 @@
 const fetchPlaceName = async (name: string) => {
   try {
     const res = await fetch(
-      `http://api.geonames.org/searchJSON?name=${name.toLowerCase()}&name_startsWith=${name.toLowerCase()}&orderby=population&maxRows=6&style=short&username=zigaz`
+      `https://geocoding-api.open-meteo.com/v1/search?name=${name}&count=10&language=en&format=json`
     );
 
     if (!res.ok) throw new Error("Something went wrong while fetching");

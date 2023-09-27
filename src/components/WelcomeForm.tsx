@@ -10,15 +10,30 @@ type citySuggestions = {
   countryCode: string;
 };
 
+// type data = {
+//   lng: string;
+//   geonameId: number;
+//   countryCode: string;
+//   name: string;
+//   toponymName: string;
+//   lat: string;
+//   fcl: string;
+//   fcode: string;
+// };
+
 type data = {
-  lng: string;
-  geonameId: number;
-  countryCode: string;
+  id: number;
   name: string;
-  toponymName: string;
-  lat: string;
-  fcl: string;
-  fcode: string;
+  latitude: number;
+  longitude: number;
+  elevation: number;
+  feature_code: string;
+  country_code: string;
+  timezone: string;
+  population: number;
+  postcodes: string[];
+  country_id: number;
+  country: string;
 };
 
 const WelcomeForm: React.FC = () => {
@@ -46,17 +61,19 @@ const WelcomeForm: React.FC = () => {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
     async function fetchData() {
       try {
         if (userInput === "") return;
         const data = await fetchPlaceName(userInput);
+
         setCitySuggestions(
-          data.geonames.map((el: data) => {
+          data.results.map((el: data) => {
             return {
-              lng: el.lng,
-              lat: el.lat,
+              lng: el.longitude,
+              lat: el.latitude,
               name: el.name,
-              countryCode: el.countryCode,
+              countryCode: el.country_code,
             };
           })
         );
@@ -65,6 +82,10 @@ const WelcomeForm: React.FC = () => {
       }
     }
     fetchData();
+
+    return () => {
+      controller.abort();
+    };
   }, [userInput]);
 
   return (

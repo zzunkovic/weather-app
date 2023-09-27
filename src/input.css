@@ -9,4 +9,5 @@ html {
 body {
   font-family: "Open Sans", sans-serif;
   overflow-x: hidden;
+  background-color: rgb(23, 37, 84);
 }
