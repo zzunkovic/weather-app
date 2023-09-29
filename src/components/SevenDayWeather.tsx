@@ -12,9 +12,11 @@ type SevenDayWeatherProps = {
 
 const SevenDayWeather: React.FC<SevenDayWeatherProps> = ({ daily }) => {
   return (
-    <div className=" pl-4 pt-12  border-blue-500 ">
-      <div className="text-2xl mb-4 text-blue-50 font-bold">7 Day Weather</div>
-      <div className="flex gap-4 overflow-x-auto pb-4 ">
+    <div className="  pt-12  border-blue-500 ">
+      <div className="text-2xl mb-4 text-blue-50 font-bold pl-4">
+        7 Day Weather
+      </div>
+      <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar pl-4">
         {daily.time.map((el, ind) => {
           return (
             <ForecastCard

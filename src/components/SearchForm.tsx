@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, useEffect, useState } from "react";
 import fetchPlaceName from "../utils/fetchPlaceName";
 import slugify from "slugify";
@@ -9,6 +9,17 @@ type citySuggestions = {
   name: string;
   countryCode: string;
 };
+
+// type data = {
+//   lng: string;
+//   geonameId: number;
+//   countryCode: string;
+//   name: string;
+//   toponymName: string;
+//   lat: string;
+//   fcl: string;
+//   fcode: string;
+// };
 
 type data = {
   id: number;
@@ -27,22 +38,14 @@ type data = {
 
 type WelcomeFormProps = {
   onSearchError: (isSet: boolean, message: string) => void;
-  onSetPrimaryLocation: (isOpen: boolean) => void;
 };
 
-const WelcomeForm: React.FC<WelcomeFormProps> = ({
-  onSearchError,
-  onSetPrimaryLocation,
-}) => {
+const SearchForm: React.FC<WelcomeFormProps> = ({ onSearchError }) => {
   const [userInput, setUserInput] = useState("");
   const [citySuggestions, setCitySuggestions] = useState<citySuggestions[]>([]);
   const [selectedCity, setSelectedCity] = useState<citySuggestions>();
 
   const navigate = useNavigate();
-
-  const setPrimaryLocationHandler = () => {
-    onSetPrimaryLocation(true);
-  };
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setUserInput(e.target.value);
@@ -101,7 +104,7 @@ const WelcomeForm: React.FC<WelcomeFormProps> = ({
       <div className="text-center  mb-8   text-white text-3xl">
         <label htmlFor="place">Enter a Location</label>
       </div>
-      <div className="flex relative z-10 ">
+      <div className="flex relative ">
         {" "}
         <input
           className="w-full   px-2 mb-8 rounded-l-xl focus:outline-none text-slate-900"
@@ -148,32 +151,8 @@ const WelcomeForm: React.FC<WelcomeFormProps> = ({
           </button>
         </div>
       </div>
-      <div className="text-center">
-        {" "}
-        <button className="" onClick={setPrimaryLocationHandler}>
-          <div className="flex justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              className="w-6 h-6 text-blue-300 mr-2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-            <div className="text-center text-blue-300 ">
-              Setup your primary location
-            </div>{" "}
-          </div>
-        </button>
-      </div>
     </div>
   );
 };
 
-export default WelcomeForm;
+export default SearchForm;

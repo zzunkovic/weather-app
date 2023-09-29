@@ -1,7 +1,7 @@
 const fetchPlaceName = async (name: string) => {
   try {
     const res = await fetch(
-      `https://geocoding-api.open-meteo.com/v1/search?name=${name}&count=10&language=en&format=json`
+      `https://geocoding-api.open-meteo.com/v1/search?name=${name}&count=10&language=en&timezone=auto&format=json`
     );
 
     if (!res.ok) throw new Error("Something went wrong while fetching");

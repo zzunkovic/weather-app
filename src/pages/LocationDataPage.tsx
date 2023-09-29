@@ -53,7 +53,8 @@ const LocationDataPage: React.FC = () => {
   const { locationData } = useParams();
 
   // eslint-disable-next-line
-  const [locationName, lat, lng] = locationData!.split("_");
+  let [locationName, lat, lng] = locationData!.split("_");
+
   const [currentPlace, setCurrentPlace] = useState<currentPlace>({
     latitude: 0,
     longitude: 0,
@@ -115,7 +116,7 @@ const LocationDataPage: React.FC = () => {
   return (
     <div className=" bg-blue-950 min-h-screen relative mx-auto">
       <CurrentDataDisplay
-        locationName={locationName}
+        locationName={locationName.replaceAll("-", " ")}
         currentTemp={currentPlace.current_weather.temperature}
         currentTime={currentPlace.current_weather.time}
         currentWeatherCode={currentPlace.current_weather.weathercode}

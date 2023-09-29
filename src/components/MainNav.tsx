@@ -7,7 +7,7 @@ const MainNav: React.FC = () => {
         <img src="/img/weatherboard-logo-white.png"></img>
       </div>
       <div>
-        <Link to="">
+        <Link to="/search">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

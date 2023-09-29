@@ -1,11 +1,8 @@
 import { useState } from "react";
 import HomeLogo from "../components/HomeLogo";
-import WelcomeForm from "../components/WelcomeForm";
-import Modal from "../components/Modal";
-import { AnimatePresence } from "framer-motion";
+import SearchForm from "../components/SearchForm";
 
-const WelcomePage: React.FC = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+const SearchPage: React.FC = () => {
   const [searchError, setSearchError] = useState({
     isSet: false,
     message: "error",
@@ -18,20 +15,8 @@ const WelcomePage: React.FC = () => {
     });
   };
 
-  const setPrimaryLocationHandler = () => {
-    setModalOpen(true);
-  };
-
-  const modalCloseHandler = () => {
-    setModalOpen(false);
-  };
-
   return (
     <div className=" bg-blue-950  h-screen bg-cover px-6 relative">
-      <AnimatePresence>
-        {modalOpen && <Modal handleClose={modalCloseHandler} />}
-      </AnimatePresence>
-
       {searchError.isSet && (
         <div className="absolute top-0 left-0 px-4 py-2 bg-red-300 text-red-900 w-full flex justify-center ">
           <div className="mr-2">
@@ -54,12 +39,9 @@ const WelcomePage: React.FC = () => {
         </div>
       )}
       <HomeLogo />
-      <WelcomeForm
-        onSetPrimaryLocation={setPrimaryLocationHandler}
-        onSearchError={searchErrorHandler}
-      />
+      <SearchForm onSearchError={searchErrorHandler} />
     </div>
   );
 };
 
-export default WelcomePage;
+export default SearchPage;

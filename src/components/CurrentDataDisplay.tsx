@@ -2,6 +2,7 @@ import MainNav from "./MainNav";
 import HourlyWeathercard from "../components/HourlyWeatherCard";
 import convertWeatherCode from "../utils/convertWeatherCode";
 import weatherCodeToImage from "../utils/weatherCodeToImage";
+import React, { useRef } from "react";
 
 type CurrentDataDisplayProps = {
   locationName: string;
@@ -31,6 +32,16 @@ const CurrentDataDisplay: React.FC<CurrentDataDisplayProps> = ({
 
   const weatherCodeString = convertWeatherCode(currentWeatherCode);
   const weatherImage = weatherCodeToImage(currentWeatherCode);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const handleMouseWheel: React.WheelEventHandler<HTMLDivElement> = (e) => {
+    const container = containerRef.current;
+
+    if (container) {
+      const scrollAmount = e.deltaY;
+
+      container.scrollLeft += scrollAmount;
+    }
+  };
 
   return (
     <div className={` bg-${weatherImage} bg-cover  pb-48 relative`}>
@@ -76,10 +87,11 @@ const CurrentDataDisplay: React.FC<CurrentDataDisplayProps> = ({
           <div className="text-white">{locationName}</div>
         </div>
         <div
-          style={{ scrollbarWidth: "none" }}
-          className="absolute bottom-0 left-0 right-0 overflow-x-auto  mx-auto "
+          className="absolute bottom-0 left-0 right-0 overflow-x-auto  mx-auto custom-scrollbar "
+          onWheel={handleMouseWheel}
+          ref={containerRef}
         >
-          <div className="flex gap-2  pl-4 -bottom-12 pb-4  ">
+          <div className="flex gap-2  pl-4 -bottom-12 pb-4 ">
             {hourly.time.slice(0, 30).map((el, ind) => {
               return (
                 <HourlyWeathercard

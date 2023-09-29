@@ -9,5 +9,20 @@ html {
 body {
   font-family: "Open Sans", sans-serif;
   overflow-x: hidden;
+
   background-color: rgb(23, 37, 84);
+  position: relative;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #1e3a8a;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #2563eb;
+  border-radius: 12px;
 }
