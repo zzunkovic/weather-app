@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import fetchPlaceDetails from "../utils/fetchPlaceDetails";
 
 import CurrentDataDisplay from "../components/CurrentDataDisplay";
 import SevenDayWeather from "../components/SevenDayWeather";
+import { usePrimaryLocation } from "../store/primaryLocationContext";
 
 type currentPlace = {
   latitude: number;
@@ -55,6 +56,14 @@ const LocationDataPage: React.FC = () => {
   // eslint-disable-next-line
   let [locationName, lat, lng] = locationData!.split("_");
 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (locationName === undefined || lat === undefined || lng === undefined) {
+      navigate("/error");
+    }
+  }, [locationName, lat, lng, navigate]);
+
   const [currentPlace, setCurrentPlace] = useState<currentPlace>({
     latitude: 0,
     longitude: 0,
@@ -98,13 +107,21 @@ const LocationDataPage: React.FC = () => {
       precipitation_probability_max: [],
     },
   });
+  const { primaryLocation, addPrimaryLocation } = usePrimaryLocation();
+  const setPrimaryLocationHandler = () => {
+    addPrimaryLocation({ name: locationName, lat, lng });
+  };
 
   useEffect(() => {
     const controller = new AbortController();
     async function fetchData() {
-      const data = await fetchPlaceDetails(+lat, +lng);
+      try {
+        const data = await fetchPlaceDetails(+lat, +lng);
 
-      setCurrentPlace({ ...data });
+        setCurrentPlace({ ...data });
+      } catch (err) {
+        navigate("/error");
+      }
     }
     fetchData();
 
@@ -113,18 +130,52 @@ const LocationDataPage: React.FC = () => {
     };
   }, [lat, lng]);
 
+  // useEffect(() => {
+  //   setInitialRender(false);
+  // }, []);
+
   return (
-    <div className=" bg-blue-950 min-h-screen relative mx-auto">
+    <div className=" bg-blue-950 min-h-screen relative mx-auto z-30">
       <CurrentDataDisplay
         locationName={locationName.replaceAll("-", " ")}
-        currentTemp={currentPlace.current_weather.temperature}
-        currentTime={currentPlace.current_weather.time}
-        currentWeatherCode={currentPlace.current_weather.weathercode}
+        currentTemp={currentPlace?.current_weather?.temperature}
+        currentTime={currentPlace?.current_weather?.time}
+        currentWeatherCode={currentPlace?.current_weather?.weathercode}
         hourly={{ ...currentPlace.hourly }}
       />
-      <div className=" mx-auto">
+      <div className=" mx-auto mb-8">
         <SevenDayWeather daily={{ ...currentPlace.daily }} />
       </div>
+      {primaryLocation?.name === locationName ? (
+        <div className="text-center text-blue-300 ">
+          This is your primary location
+        </div>
+      ) : (
+        <div className="text-center mb-4 ">
+          {" "}
+          <button className="" onClick={setPrimaryLocationHandler}>
+            <div className="flex justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6 text-blue-300 mr-2 "
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <div className="text-center text-blue-300 ">
+                Set as your primary location
+              </div>{" "}
+            </div>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

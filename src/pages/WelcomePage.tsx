@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HomeLogo from "../components/HomeLogo";
 import WelcomeForm from "../components/WelcomeForm";
 import Modal from "../components/Modal";
 import { AnimatePresence } from "framer-motion";
+import { usePrimaryLocation } from "../store/primaryLocationContext";
+import { useNavigate } from "react-router-dom";
+import slugify from "slugify";
 
 const WelcomePage: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -10,6 +13,25 @@ const WelcomePage: React.FC = () => {
     isSet: false,
     message: "error",
   });
+  const { primaryLocation, addPrimaryLocation } = usePrimaryLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const locationString = localStorage.getItem("LOCATION");
+
+    if (locationString !== null) {
+      addPrimaryLocation(JSON.parse(locationString));
+    }
+  }, [addPrimaryLocation]);
+
+  if (primaryLocation !== undefined) {
+    const citySlug = slugify(primaryLocation.name);
+
+    const slug = slugify(
+      `${citySlug} ${primaryLocation.lat} ${primaryLocation.lng} `,
+      "_"
+    );
+    navigate(`/${slug}`);
+  }
 
   const searchErrorHandler = (isSet: boolean, message: string) => {
     setSearchError({

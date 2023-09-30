@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { ChangeEvent, useEffect, useState } from "react";
 import fetchPlaceName from "../utils/fetchPlaceName";
 import slugify from "slugify";
+import { usePrimaryLocation } from "../store/primaryLocationContext";
 
 type citySuggestions = {
   lng: string;
@@ -33,6 +34,8 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearchError }) => {
   const [userInput, setUserInput] = useState("");
   const [citySuggestions, setCitySuggestions] = useState<citySuggestions[]>([]);
 
+  const { addPrimaryLocation } = usePrimaryLocation();
+
   const [selectedCity, setSelectedCity] = useState<citySuggestions>();
 
   const navigate = useNavigate();
@@ -49,6 +52,13 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearchError }) => {
 
   const searchClickHandler = () => {
     if (selectedCity !== undefined && selectedCity.name === userInput) {
+      console.log("ran");
+      addPrimaryLocation({
+        name: selectedCity.name,
+        lat: selectedCity.lat,
+        lng: selectedCity.lng,
+      });
+
       const citySlug = slugify(selectedCity.name);
 
       const slug = slugify(

@@ -17,9 +17,10 @@ const SevenDayWeather: React.FC<SevenDayWeatherProps> = ({ daily }) => {
         7 Day Weather
       </div>
       <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar pl-4">
-        {daily.time.map((el, ind) => {
+        {daily.time?.map((el, ind) => {
           return (
             <ForecastCard
+              key={ind}
               weathercode={daily.weathercode[ind]}
               time={el}
               temperatureMax={daily.temperature_2m_max[ind]}

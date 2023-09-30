@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Backdrop from "./Backdrop";
 import ModalSearch from "./ModalSearch";
 import { useState } from "react";
+
 type ModalProps = {
   handleClose: () => void;
 };
@@ -64,14 +65,14 @@ const Modal: React.FC<ModalProps> = ({ handleClose }) => {
         </div>
       )}
       <motion.div
-        className=" rounded-lg flex flex-col items-center px-8 py-4 bg-blue-950  w-full max-w-3xl mx-auto   "
+        className=" rounded-lg flex flex-col items-center px-8 py-4 bg-blue-950  w-full max-w-3xl mx-auto  border-b-4 border-blue-500  "
         onClick={(e) => e.stopPropagation()}
         variants={dropIn}
         initial="hidden"
         animate="visible"
         exit="exit"
       >
-        <div className="text-white mb-6 text-xl">
+        <div className="text-white mb-6 text-xl ">
           Choose your primary location
         </div>
         <ModalSearch onSearchError={searchErrorHandler} />

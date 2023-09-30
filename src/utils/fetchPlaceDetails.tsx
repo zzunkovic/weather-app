@@ -6,7 +6,7 @@ const fetchPlaceDetails = async (lat: number, lng: number) => {
 
     if (!res.ok) throw new Error("Something went wrong while fetching");
     const data = await res.json();
-    console.log(data);
+
     return data;
   } catch (err) {
     console.log(err);
