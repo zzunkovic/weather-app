@@ -62,7 +62,7 @@ const CurrentDataDisplay: React.FC<CurrentDataDisplayProps> = ({
     >
       <div className="  mx-auto">
         <MainNav></MainNav>
-        <div className="flex justify-between mt-2 px-4 text-white">
+        <div className="flex justify-between mt-2 px-4 text-white mb-8">
           <div className="text-gray-100">{weatherCodeString}</div>
           <div className="text-gray-100">{time}</div>
         </div>
@@ -77,7 +77,7 @@ const CurrentDataDisplay: React.FC<CurrentDataDisplayProps> = ({
             °
           </span>
         </div>
-        <div className="flex justify-center -mt-4 mb-8">
+        <div className="flex justify-center -mt-4 mb-16">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"

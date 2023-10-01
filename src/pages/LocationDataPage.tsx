@@ -121,7 +121,7 @@ const LocationDataPage: React.FC = () => {
             }
             hourly={{ ...(currentPlace?.hourly as hourly) }}
           />
-          <div className="mb-8 mx-auto max-w-6xl">
+          <div className="mb-20 mx-auto max-w-6xl ">
             <SevenDayWeather daily={{ ...(currentPlace?.daily as daily) }} />
           </div>
           {primaryLocation?.name === locationName ? (
@@ -129,7 +129,7 @@ const LocationDataPage: React.FC = () => {
               This is your primary location
             </div>
           ) : (
-            <div className="text-center mb-4 ">
+            <div className="text-center mb-16 ">
               {" "}
               <button className="" onClick={setPrimaryLocationHandler}>
                 <div className="flex justify-center">

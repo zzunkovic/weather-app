@@ -29,7 +29,7 @@ const SevenDayWeather: React.FC<SevenDayWeatherProps> = ({ daily }) => {
 
   return (
     <div className="  pt-12  border-blue-500 px-4 ">
-      <div className="text-2xl mb-4 text-blue-50 font-bold ">7 Day Weather</div>
+      <div className="text-2xl mb-8 text-blue-50 font-bold ">7 Day Weather</div>
       <SliderComponent
         showArrows={isMobileL ? false : true}
         slidesToShow={slidesDaily}
