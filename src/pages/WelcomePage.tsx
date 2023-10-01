@@ -25,11 +25,11 @@ const WelcomePage: React.FC = () => {
 
   if (primaryLocation !== undefined) {
     const citySlug = slugify(primaryLocation.name);
-
-    const slug = slugify(
-      `${citySlug} ${primaryLocation.lat} ${primaryLocation.lng} `,
-      "_"
-    );
+    const lat = primaryLocation.lat.toString();
+    const lng = primaryLocation.lng.toString();
+    const latSlug = slugify(lat.replace(".", "+"));
+    const lngSlug = slugify(lng.replace(".", "+"));
+    const slug = slugify(`${citySlug} ${latSlug} ${lngSlug} `, "_");
     navigate(`/${slug}`);
   }
 

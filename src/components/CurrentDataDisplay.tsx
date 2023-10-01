@@ -3,6 +3,8 @@ import HourlyWeathercard from "../components/HourlyWeatherCard";
 import convertWeatherCode from "../utils/convertWeatherCode";
 import weatherCodeToImage from "../utils/weatherCodeToImage";
 import React from "react";
+import SliderComponent from "./Slider";
+import { useMediaQuery } from "usehooks-ts";
 
 type CurrentDataDisplayProps = {
   locationName: string;
@@ -32,10 +34,26 @@ const CurrentDataDisplay: React.FC<CurrentDataDisplayProps> = ({
 
   const weatherCodeString = convertWeatherCode(currentWeatherCode);
   const weatherImage = weatherCodeToImage(currentWeatherCode);
-  console.log(weatherImage);
+  const isMobileXL = useMediaQuery("(max-width:1200px)");
+  const isMobileL = useMediaQuery("(max-width:1000px)");
+  const isMobileM = useMediaQuery("(max-width:900px)");
+  const isMobileXM = useMediaQuery("(max-width:750px)");
+  const isMobileS = useMediaQuery("(max-width:600px)");
+  const isMobileXS = useMediaQuery("(max-width:460px)");
+
+  const slidesToShowHourly = () => {
+    if (isMobileXS) return 3;
+    if (isMobileS) return 4;
+    if (isMobileXM) return 5;
+    if (isMobileM) return 6;
+    if (isMobileL) return 7;
+    else return 8;
+  };
+
+  const slidesHourly = slidesToShowHourly();
 
   return (
-    <div className={` bg-${weatherImage} bg-cover  pb-48 relative  z-50`}>
+    <div className={` bg-sunny bg-cover  relative pb-4  z-50`}>
       <div className="  mx-auto">
         <MainNav></MainNav>
         <div className="flex justify-between mt-2 px-4 text-white">
@@ -77,8 +95,11 @@ const CurrentDataDisplay: React.FC<CurrentDataDisplayProps> = ({
           </div>
           <div className="text-white">{locationName}</div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 overflow-x-auto  mx-auto custom-scrollbar ">
-          <div className="flex gap-2  pl-4 -bottom-12 pb-4 ">
+        <div className="mt-4 pb-2 max-w-6xl mx-auto  px-4">
+          <SliderComponent
+            showArrows={isMobileXL ? false : true}
+            slidesToShow={slidesHourly}
+          >
             {hourly.time?.slice(0, 30).map((el, ind) => {
               return (
                 <HourlyWeathercard
@@ -90,7 +111,7 @@ const CurrentDataDisplay: React.FC<CurrentDataDisplayProps> = ({
                 />
               );
             })}
-          </div>
+          </SliderComponent>
         </div>
       </div>
     </div>

@@ -20,12 +20,12 @@ const HourlyWeathercard: React.FC<HourlyWeatherCardProps> = ({
   });
 
   return (
-    <div className="  py-2 px-2 shadow-md rounded-lg bg-white/10">
+    <div className="  py-2 px-2 mr-2 shadow-md rounded-lg bg-white/10  max-w-[135px]">
       <div className="text-center text-gray-300 mb-2 ">{timeHours}</div>
       <div className="mb-2 flex justify-center">
         {weatherCodeToIcon(weatherCode)}
       </div>
-      <div className="flex justify-between  text-gray-300 gap-8">
+      <div className="flex justify-between  text-gray-300 ">
         <div className="flex items-center">
           <div>
             <svg

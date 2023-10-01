@@ -1,3 +1,4 @@
+import { useMediaQuery } from "usehooks-ts";
 import getForecastCardDate from "../utils/getForecastCardDay";
 import weatherCodeToIcon from "../utils/weatherCodeToIcon";
 
@@ -17,14 +18,14 @@ const ForecastCard: React.FC<ForecastCardProps> = ({
   precipitation,
 }) => {
   return (
-    <div className="bg-blue-900 rounded-lg px-4 py-2 border-b-4  border-blue-500 shadow-lg">
-      <div className="text-md mb-4  text-blue-100 text-center  ">
+    <div className="bg-blue-900 rounded-lg px-4 py-2 border-b-4  border-blue-500 shadow-lg max-w-[280px] mr-2">
+      <div className="text-md  mb-4  text-blue-100 text-center  ">
         {getForecastCardDate(time)}
       </div>
       <div className="flex justify-center mb-4">
         {weatherCodeToIcon(weathercode)}
       </div>
-      <div className="flex justify-between gap-10">
+      <div className="flex justify-between gap-2">
         <div className="flex items-center ">
           <div>
             <svg
@@ -36,7 +37,9 @@ const ForecastCard: React.FC<ForecastCardProps> = ({
               <path d="M192 512C86 512 0 426 0 320C0 228.8 130.2 57.7 166.6 11.7C172.6 4.2 181.5 0 191.1 0h1.8c9.6 0 18.5 4.2 24.5 11.7C253.8 57.7 384 228.8 384 320c0 106-86 192-192 192zM96 336c0-8.8-7.2-16-16-16s-16 7.2-16 16c0 61.9 50.1 112 112 112c8.8 0 16-7.2 16-16s-7.2-16-16-16c-44.2 0-80-35.8-80-80z" />
             </svg>
           </div>
-          <div className="text-lg text-blue-50">{precipitation}%</div>
+          <div className="text-lg max-[500px]:text-sm text-blue-50">
+            {precipitation}%
+          </div>
         </div>
         <div className="flex gap-2">
           <div className="flex items-center">
@@ -56,7 +59,7 @@ const ForecastCard: React.FC<ForecastCardProps> = ({
                 />
               </svg>
             </div>
-            <div className="text-lg text-blue-50">
+            <div className="text-lg max-[500px]:text-sm text-blue-50">
               {Math.round(temperatureMax)}°
             </div>
           </div>{" "}
@@ -77,7 +80,7 @@ const ForecastCard: React.FC<ForecastCardProps> = ({
                 />
               </svg>
             </div>
-            <div className="text-lg text-blue-50 ">
+            <div className="text-lg max-[500px]:text-sm text-blue-50 ">
               {Math.round(temperatureMin)}°
             </div>
           </div>

@@ -1,4 +1,6 @@
 import ForecastCard from "./ForecastCard";
+import SliderComponent from "./Slider";
+import { useMediaQuery } from "usehooks-ts";
 
 type SevenDayWeatherProps = {
   daily: {
@@ -11,12 +13,27 @@ type SevenDayWeatherProps = {
 };
 
 const SevenDayWeather: React.FC<SevenDayWeatherProps> = ({ daily }) => {
+  const isMobileL = useMediaQuery("(max-width:1200px)");
+
+  const isMobileXM = useMediaQuery("(max-width:750px)");
+  const isMobileS = useMediaQuery("(max-width:600px)");
+  const isMobileXS = useMediaQuery("(max-width:350px)");
+
+  const slidesToShowDaily = () => {
+    if (isMobileXS) return 1;
+    if (isMobileS) return 2;
+    if (isMobileXM) return 3;
+    else return 4;
+  };
+  const slidesDaily = slidesToShowDaily();
+
   return (
-    <div className="  pt-12  border-blue-500 ">
-      <div className="text-2xl mb-4 text-blue-50 font-bold pl-4">
-        7 Day Weather
-      </div>
-      <div className="flex gap-4 overflow-x-auto pb-4 custom-scrollbar pl-4">
+    <div className="  pt-12  border-blue-500 px-4 ">
+      <div className="text-2xl mb-4 text-blue-50 font-bold ">7 Day Weather</div>
+      <SliderComponent
+        showArrows={isMobileL ? false : true}
+        slidesToShow={slidesDaily}
+      >
         {daily.time?.map((el, ind) => {
           return (
             <ForecastCard
@@ -29,7 +46,7 @@ const SevenDayWeather: React.FC<SevenDayWeatherProps> = ({ daily }) => {
             />
           );
         })}
-      </div>
+      </SliderComponent>
     </div>
   );
 };
