@@ -77,7 +77,7 @@ const CurrentDataDisplay: React.FC<CurrentDataDisplayProps> = ({
             °
           </span>
         </div>
-        <div className="flex justify-center -mt-4">
+        <div className="flex justify-center -mt-4 mb-8">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
