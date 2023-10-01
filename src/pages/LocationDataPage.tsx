@@ -125,7 +125,7 @@ const LocationDataPage: React.FC = () => {
             <SevenDayWeather daily={{ ...(currentPlace?.daily as daily) }} />
           </div>
           {primaryLocation?.name === locationName ? (
-            <div className="text-center text-blue-300 ">
+            <div className="text-center text-blue-300 mb-16 ">
               This is your primary location
             </div>
           ) : (
