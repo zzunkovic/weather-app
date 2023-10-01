@@ -1,4 +1,3 @@
-import { useMediaQuery } from "usehooks-ts";
 import getForecastCardDate from "../utils/getForecastCardDay";
 import weatherCodeToIcon from "../utils/weatherCodeToIcon";
 

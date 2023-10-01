@@ -53,7 +53,7 @@ const CurrentDataDisplay: React.FC<CurrentDataDisplayProps> = ({
   const slidesHourly = slidesToShowHourly();
 
   return (
-    <div className={` bg-sunny bg-cover  relative pb-4  z-50`}>
+    <div className={` bg-${weatherImage} bg-cover  relative pb-4  z-50`}>
       <div className="  mx-auto">
         <MainNav></MainNav>
         <div className="flex justify-between mt-2 px-4 text-white">
