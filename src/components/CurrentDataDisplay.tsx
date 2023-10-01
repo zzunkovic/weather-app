@@ -34,6 +34,7 @@ const CurrentDataDisplay: React.FC<CurrentDataDisplayProps> = ({
 
   const weatherCodeString = convertWeatherCode(currentWeatherCode);
   const weatherImage = weatherCodeToImage(currentWeatherCode);
+
   const isMobileXL = useMediaQuery("(max-width:1200px)");
   const isMobileL = useMediaQuery("(max-width:1000px)");
   const isMobileM = useMediaQuery("(max-width:900px)");
@@ -53,7 +54,12 @@ const CurrentDataDisplay: React.FC<CurrentDataDisplayProps> = ({
   const slidesHourly = slidesToShowHourly();
 
   return (
-    <div className={` bg-${weatherImage} bg-cover  relative pb-4  z-50`}>
+    <div
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),url('/img/${weatherImage}.jpg')`,
+      }}
+      className={` bg-cover  relative pb-4  z-50`}
+    >
       <div className="  mx-auto">
         <MainNav></MainNav>
         <div className="flex justify-between mt-2 px-4 text-white">

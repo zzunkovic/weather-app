@@ -819,6 +819,10 @@ video {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),url('/img/sunny.jpg') ;
 }
 
+.bg-\[url\(\'\/img\/sunny\.jpg\'\)\] {
+  background-image: url('/img/sunny.jpg');
+}
+
 .bg-cover {
   background-size: cover;
 }
