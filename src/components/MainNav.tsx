@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const MainNav: React.FC = () => {
   return (
     <div className="flex justify-between py-2 px-4 items-center">
-      <div className="w-32 lg:w-48">
+      <div className="  w-40 lg:w-48">
         <img src="/img/weatherboard-logo-white.png"></img>
       </div>
       <div>
