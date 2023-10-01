@@ -98,10 +98,10 @@ const WelcomeForm: React.FC<WelcomeFormProps> = ({
 
   return (
     <div className=" rounded-xl py-12 px-4 max-w-4xl mx-auto">
-      <div className="text-center  mb-8   text-white text-3xl">
+      <div className="text-center  mb-4   text-white text-2xl">
         <label htmlFor="place">Enter a Location</label>
       </div>
-      <div className="flex relative z-10 ">
+      <div className="flex relative z-10 mb-4">
         {" "}
         <input
           className="w-full   px-2 mb-8 rounded-l-xl focus:outline-none text-slate-900"
