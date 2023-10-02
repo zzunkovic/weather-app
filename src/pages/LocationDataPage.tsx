@@ -88,6 +88,14 @@ const LocationDataPage: React.FC = () => {
   };
 
   useEffect(() => {
+    const locationString = localStorage.getItem("LOCATION");
+
+    if (locationString !== null) {
+      addPrimaryLocation(JSON.parse(locationString));
+    }
+  }, []);
+
+  useEffect(() => {
     const controller = new AbortController();
     async function fetchData() {
       try {
@@ -124,7 +132,7 @@ const LocationDataPage: React.FC = () => {
           <div className="mb-20 mx-auto max-w-6xl ">
             <SevenDayWeather daily={{ ...(currentPlace?.daily as daily) }} />
           </div>
-          {primaryLocation?.name === locationName ? (
+          {primaryLocation?.lat === lat ? (
             <div className="text-center text-blue-300 mb-16 ">
               This is your primary location
             </div>

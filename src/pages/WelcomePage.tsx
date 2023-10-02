@@ -23,15 +23,17 @@ const WelcomePage: React.FC = () => {
     }
   }, [addPrimaryLocation]);
 
-  if (primaryLocation !== undefined) {
-    const citySlug = slugify(primaryLocation.name);
-    const lat = primaryLocation.lat.toString();
-    const lng = primaryLocation.lng.toString();
-    const latSlug = slugify(lat.replace(".", "+"));
-    const lngSlug = slugify(lng.replace(".", "+"));
-    const slug = slugify(`${citySlug} ${latSlug} ${lngSlug} `, "_");
-    navigate(`/${slug}`);
-  }
+  useEffect(() => {
+    if (primaryLocation !== undefined) {
+      const citySlug = slugify(primaryLocation.name);
+      const lat = primaryLocation.lat.toString();
+      const lng = primaryLocation.lng.toString();
+      const latSlug = slugify(lat.replace(".", "+"));
+      const lngSlug = slugify(lng.replace(".", "+"));
+      const slug = slugify(`${citySlug} ${latSlug} ${lngSlug} `, "_");
+      navigate(`/${slug}`);
+    }
+  });
 
   const searchErrorHandler = (isSet: boolean, message: string) => {
     setSearchError({

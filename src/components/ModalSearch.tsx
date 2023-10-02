@@ -52,7 +52,6 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearchError }) => {
 
   const searchClickHandler = () => {
     if (selectedCity !== undefined && selectedCity.name === userInput) {
-      console.log("ran");
       addPrimaryLocation({
         name: selectedCity.name,
         lat: selectedCity.lat,
@@ -60,11 +59,11 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearchError }) => {
       });
 
       const citySlug = slugify(selectedCity.name);
-
-      const slug = slugify(
-        `${citySlug} ${selectedCity?.lat} ${selectedCity?.lng} `,
-        "_"
-      );
+      const lat = selectedCity.lat.toString();
+      const lng = selectedCity.lng.toString();
+      const latSlug = slugify(lat.replace(".", "+"));
+      const lngSlug = slugify(lng.replace(".", "+"));
+      const slug = slugify(`${citySlug} ${latSlug} ${lngSlug} `, "_");
       navigate(`/${slug}`);
     } else {
       onSearchError(true, "Please select a location from the suggestions");
