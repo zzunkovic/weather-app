@@ -26,16 +26,24 @@ type data = {
   country: string;
 };
 
+/*
+  Appears once the setup primary location button is pressed on the home page. User can then search for locations and add them as a primary location. 
+
+*/
+
 type ModalSearchProps = {
   onSearchError: (isSet: boolean, message: string) => void;
 };
 
 const ModalSearch: React.FC<ModalSearchProps> = ({ onSearchError }) => {
   const [userInput, setUserInput] = useState("");
+
+  //suggestions that display in the dropdown menu
   const [citySuggestions, setCitySuggestions] = useState<citySuggestions[]>([]);
 
   const { addPrimaryLocation } = usePrimaryLocation();
 
+  //city that the user selects from the list
   const [selectedCity, setSelectedCity] = useState<citySuggestions>();
 
   const navigate = useNavigate();
@@ -51,6 +59,7 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearchError }) => {
   };
 
   const searchClickHandler = () => {
+    //add city as the primary location inside local storage
     if (selectedCity !== undefined && selectedCity.name === userInput) {
       addPrimaryLocation({
         name: selectedCity.name,
@@ -58,6 +67,7 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearchError }) => {
         lng: selectedCity.lng,
       });
 
+      //navigate to the city data display
       const citySlug = slugify(selectedCity.name);
       const lat = selectedCity.lat.toString();
       const lng = selectedCity.lng.toString();
@@ -71,6 +81,7 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearchError }) => {
   };
 
   useEffect(() => {
+    //fetches data for suggestion display based on search query
     const controller = new AbortController();
     async function fetchData() {
       try {
@@ -102,7 +113,11 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearchError }) => {
     <div className="flex relative z-10 w-full ">
       {" "}
       <input
-        className="w-full   px-2 mb-8 rounded-l-xl focus:outline-none text-slate-900"
+        className={`w-full   px-2 mb-8 rounded-l-xl focus:outline-none text-slate-900 ${
+          selectedCity !== undefined && selectedCity.name === userInput
+            ? "bg-green-200"
+            : ""
+        } `}
         onChange={onChangeHandler}
         type="text"
         id="place"
@@ -133,13 +148,13 @@ const ModalSearch: React.FC<ModalSearchProps> = ({ onSearchError }) => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             className="w-6 h-6"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M12 4.5v15m7.5-7.5h-15"
             />
           </svg>

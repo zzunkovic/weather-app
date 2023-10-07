@@ -36,6 +36,11 @@ type data = {
   country: string;
 };
 
+/*
+  Allows the user to search for different cities
+
+*/
+
 type WelcomeFormProps = {
   onSearchError: (isSet: boolean, message: string) => void;
 };
@@ -58,6 +63,7 @@ const SearchForm: React.FC<WelcomeFormProps> = ({ onSearchError }) => {
   };
 
   const searchClickHandler = () => {
+    //navigate to the selected city
     if (selectedCity !== undefined && selectedCity.name === userInput) {
       const citySlug = slugify(selectedCity.name);
       const lat = selectedCity.lat.toString();
@@ -107,7 +113,11 @@ const SearchForm: React.FC<WelcomeFormProps> = ({ onSearchError }) => {
       <div className="flex relative ">
         {" "}
         <input
-          className="w-full   px-2 mb-8 rounded-l-xl focus:outline-none text-slate-900"
+          className={`w-full   px-2 mb-8 rounded-l-xl focus:outline-none text-slate-900 ${
+            selectedCity !== undefined && selectedCity.name === userInput
+              ? "bg-green-200"
+              : ""
+          } `}
           onChange={onChangeHandler}
           type="text"
           id="place"

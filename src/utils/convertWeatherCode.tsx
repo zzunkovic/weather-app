@@ -1,3 +1,8 @@
+/*
+  Converts the weather code received from the API to a text a user can understand
+
+*/
+
 const convertWeatherCode = (code: number) => {
   switch (code) {
     case 0:

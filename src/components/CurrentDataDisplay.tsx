@@ -19,6 +19,11 @@ type CurrentDataDisplayProps = {
   };
 };
 
+/*
+Renders the latest weather data from the API
+
+*/
+
 const CurrentDataDisplay: React.FC<CurrentDataDisplayProps> = ({
   locationName,
   currentTemp,
@@ -42,6 +47,7 @@ const CurrentDataDisplay: React.FC<CurrentDataDisplayProps> = ({
   const isMobileS = useMediaQuery("(max-width:600px)");
   const isMobileXS = useMediaQuery("(max-width:460px)");
 
+  //Sets the number of slides to display at different screen sizes
   const slidesToShowHourly = () => {
     if (isMobileXS) return 3;
     if (isMobileS) return 4;

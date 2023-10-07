@@ -66,6 +66,11 @@ type daily = {
   precipitation_probability_max: number[];
 };
 
+/*
+  Renders all the data related to the weather of the city
+
+*/
+
 const LocationDataPage: React.FC = () => {
   const { locationData } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -76,6 +81,7 @@ const LocationDataPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    //takes care of invalid urls
     if (locationName === undefined || lat === undefined || lng === undefined) {
       navigate("/error");
     }
@@ -88,6 +94,7 @@ const LocationDataPage: React.FC = () => {
   };
 
   useEffect(() => {
+    //getting primary location from local storage in order to check whether the location is primary or not
     const locationString = localStorage.getItem("LOCATION");
 
     if (locationString !== null) {
@@ -96,6 +103,7 @@ const LocationDataPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    //fetches the data of the city
     const controller = new AbortController();
     async function fetchData() {
       try {
@@ -132,7 +140,7 @@ const LocationDataPage: React.FC = () => {
           <div className="mb-20 mx-auto max-w-6xl ">
             <SevenDayWeather daily={{ ...(currentPlace?.daily as daily) }} />
           </div>
-          {primaryLocation?.lat === lat ? (
+          {primaryLocation?.lat == lat && primaryLocation.lng == lng ? (
             <div className="text-center text-blue-300 mb-16 ">
               This is your primary location
             </div>

@@ -15,6 +15,10 @@ const SearchPage: React.FC = () => {
     });
   };
 
+  /*
+Renders the search
+ */
+
   return (
     <div className=" bg-blue-950  h-screen bg-cover px-6 relative">
       {searchError.isSet && (

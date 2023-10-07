@@ -30,6 +30,10 @@ type WelcomeFormProps = {
   onSetPrimaryLocation: (isOpen: boolean) => void;
 };
 
+/*
+  Allows the user to search for different cities and navigate to data display 
+*/
+
 const WelcomeForm: React.FC<WelcomeFormProps> = ({
   onSearchError,
   onSetPrimaryLocation,
@@ -55,6 +59,7 @@ const WelcomeForm: React.FC<WelcomeFormProps> = ({
   };
 
   const searchClickHandler = () => {
+    //navigate to the selected city
     if (selectedCity !== undefined && selectedCity.name === userInput) {
       const citySlug = slugify(selectedCity.name);
       const lat = selectedCity.lat.toString();
@@ -104,7 +109,11 @@ const WelcomeForm: React.FC<WelcomeFormProps> = ({
       <div className="flex relative z-10 mb-4">
         {" "}
         <input
-          className="w-full   px-2 mb-8 rounded-l-xl focus:outline-none text-slate-900"
+          className={`w-full   px-2 mb-8 rounded-l-xl focus:outline-none text-slate-900 ${
+            selectedCity !== undefined && selectedCity.name === userInput
+              ? "bg-green-200"
+              : ""
+          } `}
           onChange={onChangeHandler}
           type="text"
           id="place"

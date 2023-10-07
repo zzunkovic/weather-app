@@ -1,3 +1,8 @@
+/*
+  Converts the weather code to an image that represents that weather condition
+
+*/
+
 const weatherCodeToImage = (code: number) => {
   switch (code) {
     case 0:

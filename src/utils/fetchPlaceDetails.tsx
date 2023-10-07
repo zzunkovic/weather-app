@@ -1,3 +1,8 @@
+/*
+  Fetches the data from the API based on latitude and longitude values
+
+*/
+
 const fetchPlaceDetails = async (lat: string, lng: string) => {
   try {
     const res = await fetch(

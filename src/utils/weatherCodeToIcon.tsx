@@ -1,3 +1,8 @@
+/*
+  Converts weather code to an svg that represents that weather condition
+
+*/
+
 const weatherCodeToIcon = (code: number) => {
   switch (code) {
     case 0:

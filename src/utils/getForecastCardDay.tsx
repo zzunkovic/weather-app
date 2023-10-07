@@ -1,3 +1,8 @@
+/*
+  Converts a date to the name of the weekday, also indicates if the date is perhaps today or tommorrow.
+
+*/
+
 const getForecastCardDate = (date: string) => {
   const currentDate = new Date();
   const cardDate = new Date(date);

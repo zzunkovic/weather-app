@@ -1,3 +1,8 @@
+/*
+  Fetches places by name in order to later display it as a suggestion
+
+*/
+
 const fetchPlaceName = async (name: string) => {
   try {
     const res = await fetch(

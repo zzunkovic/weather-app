@@ -12,6 +12,11 @@ type SevenDayWeatherProps = {
   };
 };
 
+/*
+  Displays the weather forecast for seven days
+
+*/
+
 const SevenDayWeather: React.FC<SevenDayWeatherProps> = ({ daily }) => {
   const isMobileL = useMediaQuery("(max-width:1200px)");
 

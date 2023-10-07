@@ -7,6 +7,11 @@ type HourlyWeatherCardProps = {
   temperature: number;
 };
 
+/*
+  Displays data in a card for individual hours of the day. Used in the  CurrentDataDisplay component
+
+*/
+
 const HourlyWeathercard: React.FC<HourlyWeatherCardProps> = ({
   time,
   weatherCode,

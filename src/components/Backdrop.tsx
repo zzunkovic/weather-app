@@ -5,6 +5,11 @@ type BackdropProps = {
   onClick: () => void;
 };
 
+/*
+  Servers as a backdrop to the modal
+
+*/
+
 const Backdrop: React.FC<BackdropProps> = ({ children, onClick }) => {
   return (
     <motion.div

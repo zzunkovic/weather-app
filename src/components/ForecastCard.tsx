@@ -9,6 +9,11 @@ type ForecastCardProps = {
   precipitation: number;
 };
 
+/*
+  Displays data in a card for individual forecast. Used in the  SevenDayWeather component
+
+*/
+
 const ForecastCard: React.FC<ForecastCardProps> = ({
   time,
   weathercode,
