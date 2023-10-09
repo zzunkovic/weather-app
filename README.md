@@ -30,10 +30,5 @@ Depending on the current weather conditions, appropriate images are shown on the
 On each page, there's an option to set a primary location. However, if the primary location you've chosen matches the location currently displayed on the forecast page, this option will not be available. This feature allows you to easily switch between primary locations when needed.
 
 
-
-
-
-
-
 ### Search Page
-This page is used for searching locations, just like on the home page with the difference that the setup primary location button is not available.
+This page is used for searching locations, much like on the home page with the difference that the button for settting up the primary location is not available.
