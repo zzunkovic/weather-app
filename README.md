@@ -20,4 +20,8 @@ Weatherboard is weather application that displays the weather forecast for a que
 
 ### Home Page
 On the welcome screen the user can enter a location which he wants to check the weather forecast for. The search button is only available when the
-user selectes one of the valid locations that are provided from the API
+user selects one of the valid locations that are provided from the API. Each time the user types, a fetch request is sent to the API that then returns
+an array of cities that could potentialy be of users interest. If the city is valid, the user gets taken to the forecast page.
+
+### Forecast Page
+
